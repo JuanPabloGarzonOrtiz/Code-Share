@@ -1,0 +1,80 @@
+body{
+    background-color: rgb(18, 18, 18);
+    color: white;
+}
+/*Header*/
+header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding:10px;
+    border: solid white 2px;
+    border-radius: 10px;
+}
+header .background-input{
+    background-color: rgb(88, 88, 88);
+    width: 40%;
+    height: 35px;
+}
+header img{
+    width: 50px;
+}
+.background-input{
+    border: solid white 2px;
+    border-radius: 10px;
+}
+.background-input svg{
+    position: absolute;
+    transform: translatex(-100%);
+}
+.background-input input{
+    width: 98%;
+    height: 100%;
+    background: none;
+    border: none;
+    outline: none;
+    color: white;
+}
+/*main*/
+.main-index{
+    display: flex;
+    justify-content: space-between;
+    margin: 2%;
+    height: 80vh;
+    color: white;
+}
+
+/*Filtros*/
+.filtros{
+    flex: 0.7;
+    height: min-content;
+    align-self: center;
+    padding: 10px 20px;
+    border: solid white 2px;
+    border-radius: 10px;
+}
+.filtros div{
+    display: flex;
+    justify-content: space-between;
+    font-size: 150%;
+}
+
+/*Muro*/
+.muro{
+    flex: 2.3;
+    margin-left: 2%;
+    padding: 2%;
+    gap: 50%;
+    overflow-y: auto;
+    flex-wrap: nowrap;
+    height: 75vh;
+    
+}
+.perfil{
+    display: flex;
+    gap: 6%;
+    border: solid white 2px;
+    border-radius: 10px;
+    margin-bottom: 2%;
+    padding: 1%;
+}
