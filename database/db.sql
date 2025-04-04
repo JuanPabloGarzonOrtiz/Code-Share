@@ -15,5 +15,6 @@ CREATE TABLE repositories(
 	description TEXT,
 	url_page TEXT NOT NULL,
 	id_user INTEGER NOT NULL,
+	screenshots BYTEA,
 	FOREIGN KEY(id_user) REFERENCES users(id_user)
 );
