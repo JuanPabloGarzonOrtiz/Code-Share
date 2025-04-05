@@ -1,0 +1,29 @@
+.proyect{
+    margin-bottom: 2%;
+    padding: 2%;
+}
+.proyect a{
+    text-decoration: none;
+    color: white;
+}
+.proyect h1{
+    margin: 0;
+    width: max-content;
+}
+.proyect a{
+    width: 8%;
+}
+.proyect .photo_profile{
+    width: 100%;
+    border-radius: 100px;
+}
+.proyect p{
+    margin: 10px 10px 5px 10px;
+}
+.images-move{
+    align-items: center;
+}
+.image_muro{
+    width: 74vh;
+}
+
