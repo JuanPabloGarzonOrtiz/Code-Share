@@ -4,11 +4,16 @@ function insertHTML(ruta_Server, contenedor, position, htmlTemplate){
     fetch(ruta_Server)
     .then(response => response.json())
     .then(data =>{
-        for (let element of data) {
-            let html = htmlTemplate.replace(/\$\{(.*?)\}/g, (match, key) => element[key.trim()] || '');
-            document.getElementById(contenedor).insertAdjacentHTML(position, html);
-            if (html.includes('id="presentacion"')) {
-                break;
+        const params = new URLSearchParams(window.location.search);
+        const nombre = params.get('name');  
+        for (let element of data){
+            if (htmlTemplate.includes('id="presentacion"') && element.display_name == nombre){ // Data Perfil
+                let html = htmlTemplate.replace(/\$\{(.*?)\}/g, (match, key) => element[key.trim()] || '');
+                document.getElementById(contenedor).insertAdjacentHTML(position, html);
+                return;
+            }else if ((!htmlTemplate.includes('id="presentacion"') && element.display_name == nombre) || (["muro-index", "muro-search"].includes(contenedor))){ // Repostorios Perfil || Repos index || Profiles
+                let html = htmlTemplate.replace(/\$\{(.*?)\}/g, (match, key) => element[key.trim()] || '');
+                document.getElementById(contenedor).insertAdjacentHTML(position, html);
             }
         }
     })
@@ -71,7 +76,7 @@ window.addEventListener("DOMContentLoaded", () => {
         "main-profile",
         "beforeend",
         `<div class="repositorio">
-            <a href=\${url_page}}>
+            <a href=\${url_page}>
                 <h2>\${name_repo}</h2>
             </a>
             <div class="info_proyect">

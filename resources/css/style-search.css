@@ -6,9 +6,9 @@
     align-items: center;
 }
 .perfil a{
-    width: 40%;
+    width: 150px;
 }
 .perfil img{
-    width: 100%;
+    width: 150px;
     border-radius: 100px;
 }
