@@ -1,20 +1,34 @@
 function insertHTML(ruta_Server, contenedor, position, htmlTemplate){
     const params = new URLSearchParams(window.location.search);
-    const name = params.get("name");
     fetch(ruta_Server)
     .then(response => response.json())
     .then(data =>{
         const params = new URLSearchParams(window.location.search);
+        const data_Search =  params.get('search');
         const nombre = params.get('name');  
-        for (let element of data){
-            if (htmlTemplate.includes('id="presentacion"') && element.display_name == nombre){ // Data Perfil
-                let html = htmlTemplate.replace(/\$\{(.*?)\}/g, (match, key) => element[key.trim()] || '');
+        var user_Search = data.find(element => element.display_name === data_Search)
+        var user_Profile = data.find(element => element.display_name === nombre)
+        if (contenedor == "main-profile"){
+            if (htmlTemplate.includes('id="presentacion"')){
+                let html = htmlTemplate.replace(/\$\{(.*?)\}/g, (match, key) => user_Profile[key.trim()] || '');
                 document.getElementById(contenedor).insertAdjacentHTML(position, html);
-                return;
-            }else if ((!htmlTemplate.includes('id="presentacion"') && element.display_name == nombre) || (["muro-index", "muro-search"].includes(contenedor))){ // Repostorios Perfil || Repos index || Profiles
+                return
+            }else if (htmlTemplate.includes('class="repositorio"')){
+                for (let element of data){
+                    if (element.display_name == nombre){
+                        let html = htmlTemplate.replace(/\$\{(.*?)\}/g, (match, key) => element[key.trim()] || '');
+                        document.getElementById(contenedor).insertAdjacentHTML(position, html);
+                    }
+                }
+            }
+        }else if (contenedor == "muro-index" || !user_Search){
+            for (let element of data){
                 let html = htmlTemplate.replace(/\$\{(.*?)\}/g, (match, key) => element[key.trim()] || '');
                 document.getElementById(contenedor).insertAdjacentHTML(position, html);
             }
+        }else if (contenedor == "muro-search" && user_Search){
+            let html = htmlTemplate.replace(/\$\{(.*?)\}/g, (match, key) => user_Search[key.trim()] || '');
+            document.getElementById(contenedor).insertAdjacentHTML(position, html);
         }
     })
 }

@@ -2,19 +2,20 @@ window.addEventListener("DOMContentLoaded", () =>{
     let path = location.pathname.includes("/resources/views") 
         ? { home: "../../index.html", img: "../images/icon_Page.png", search: "search.html" }
         : { home: "index.html", img: "resources/images/icon_Page.png", search: "resources/views/search.html" };
-
     document.getElementById("header").insertAdjacentHTML("afterbegin",
                                                         `<header>
                                                             <a href=${path.home}>
                                                                 <img src=${path.img} alt="">
                                                             </a>
                                                             <div class="background-input">
-                                                                <input type="text" placeholder="Search">
-                                                                <a href=${path.search}>
-                                                                    <svg width="30" height="30">
-                                                                        <path d="M32.667,35.000L22.167,24.500C21.333,25.167,20.375,25.694,19.292,26.083C18.208,26.472,17.056,26.667,15.833,26.667C12.806,26.667,10.243,25.618,8.146,23.521C6.049,21.424,5.000,18.861,5.000,15.833C5.000,12.806,6.049,10.243,8.146,8.146C10.243,6.049,12.806,5.000,15.833,5.000C18.861,5.000,21.424,6.049,23.521,8.146C25.618,10.243,26.667,12.806,26.667,15.833C26.667,17.056,26.472,18.208,26.083,19.292C25.694,20.375,25.167,21.333,24.500,22.167L35.000,32.667L32.667,35.000ZZM15.833,23.333C17.917,23.333,19.688,22.604,21.146,21.146C22.604,19.688,23.333,17.917,23.333,15.833C23.333,13.750,22.604,11.979,21.146,10.521C19.688,9.063,17.917,8.333,15.833,8.333C13.750,8.333,11.979,9.063,10.521,10.521C9.063,11.979,8.333,13.750,8.333,15.833C8.333,17.917,9.063,19.688,10.521,21.146C11.979,22.604,13.750,23.333,15.833,23.333ZZ" style="fill: rgb(255, 255, 255);"/>
-                                                                    </svg>
-                                                                </a>
+                                                                <form method="POST" id="form-search" action="">                                                                    
+                                                                    <input type="text" placeholder="Search..." name="busqueda">
+                                                                    <button name="buscar">
+                                                                        <svg width="30" height="30">
+                                                                            <path d="M32.667,35.000L22.167,24.500C21.333,25.167,20.375,25.694,19.292,26.083C18.208,26.472,17.056,26.667,15.833,26.667C12.806,26.667,10.243,25.618,8.146,23.521C6.049,21.424,5.000,18.861,5.000,15.833C5.000,12.806,6.049,10.243,8.146,8.146C10.243,6.049,12.806,5.000,15.833,5.000C18.861,5.000,21.424,6.049,23.521,8.146C25.618,10.243,26.667,12.806,26.667,15.833C26.667,17.056,26.472,18.208,26.083,19.292C25.694,20.375,25.167,21.333,24.500,22.167L35.000,32.667L32.667,35.000ZZM15.833,23.333C17.917,23.333,19.688,22.604,21.146,21.146C22.604,19.688,23.333,17.917,23.333,15.833C23.333,13.750,22.604,11.979,21.146,10.521C19.688,9.063,17.917,8.333,15.833,8.333C13.750,8.333,11.979,9.063,10.521,10.521C9.063,11.979,8.333,13.750,8.333,15.833C8.333,17.917,9.063,19.688,10.521,21.146C11.979,22.604,13.750,23.333,15.833,23.333ZZ" style="fill: rgb(255, 255, 255);"/>
+                                                                        </svg>
+                                                                    </button>
+                                                                </form>
                                                             </div>
                                                             <a href="https://github.com/login/oauth/authorize?client_id=Ov23li6V2cWqtfI5L6bF&redirect_uri=https://server-5lrb.onrender.com/token&scope=user%20repo">
                                                                 <svg width="40" height="40" viewBox="1532 -1529.5 50 45">
@@ -22,6 +23,12 @@ window.addEventListener("DOMContentLoaded", () =>{
                                                                 </svg>
                                                             </a>
                                                         </header>`);
+    const formBusqueda = document.getElementById('form-search');
+    formBusqueda.addEventListener('submit', (event) =>{
+        event.preventDefault(); 
+        const data_input = formBusqueda.busqueda.value;
+        window.location.href = `${path.search}?search=${data_input}`
+    });
                                                     
     document.getElementById("filtros").innerHTML = `<h1>Filtrar por:</h1>
                                                     <div>
@@ -45,3 +52,5 @@ window.addEventListener("DOMContentLoaded", () =>{
                                                         <p class="reconteo"><strong>1K</strong></p>
                                                     </div>`;
 });
+
+
