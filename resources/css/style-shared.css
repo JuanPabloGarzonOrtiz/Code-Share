@@ -33,7 +33,7 @@ header img{
 
 /*main*/
 .main-index{
-    margin: 2% 0 0 2%;
+    margin: 1% 0 0 2%;
     height: 80vh;
 }
 
@@ -44,7 +44,7 @@ header img{
     padding: 2%;
     overflow-y: auto;
     flex-wrap: nowrap;
-    height: 69vh;
+    height: 73vh;
 }
 
 /*Filtros*/
