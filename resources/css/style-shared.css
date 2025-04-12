@@ -17,12 +17,12 @@ header img{
 }
 .background-input button{
     position: absolute;
-    transform: translatex(-100%);
+    transform: translatex(-10%);
     background: none;
     border: none;
 }
 .background-input input{
-    width: 98%;
+    width: 90%;
     height: 30px;
     background: none;
     border: none;

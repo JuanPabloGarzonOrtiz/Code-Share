@@ -14,10 +14,12 @@ function insertHTML(ruta_Server, contenedor, position, htmlTemplate){
                 document.getElementById(contenedor).insertAdjacentHTML(position, html);
                 return
             }else if (htmlTemplate.includes('class="repositorio"')){
-                for (let element of data){
+                urls = []
+                for (let element of data){ 
                     if (element.display_name == nombre){
                         let html = htmlTemplate.replace(/\$\{(.*?)\}/g, (match, key) => element[key.trim()] || '');
                         document.getElementById(contenedor).insertAdjacentHTML(position, html);
+                        insert_Iframe(element);
                     }
                 }
             }
@@ -25,6 +27,7 @@ function insertHTML(ruta_Server, contenedor, position, htmlTemplate){
             for (let element of data){
                 let html = htmlTemplate.replace(/\$\{(.*?)\}/g, (match, key) => element[key.trim()] || '');
                 document.getElementById(contenedor).insertAdjacentHTML(position, html);
+                insert_Iframe(element);
             }
         }else if (contenedor == "muro-search" && user_Search){
             let html = htmlTemplate.replace(/\$\{(.*?)\}/g, (match, key) => user_Search[key.trim()] || '');
@@ -41,9 +44,10 @@ function move_imgs(){
             const container = proyect.querySelector('.section_imgs')
 
             if(btnLeft && btnRight && container){
-                const imageWidth = container.querySelector('img').offsetWidth;
+                const img = container.querySelector('img');
+                const elementsWifth = (img) ? img.offsetWidth : container.querySelector('iframe').offsetWidth;
                 const gap = parseInt(getComputedStyle(container).gap) || 0;
-                const totalMove = imageWidth + gap;
+                const totalMove = elementsWifth + gap;
 
                 btnLeft.addEventListener('click', () => {
                     container.scrollBy({ left: -totalMove, behavior: 'smooth' });
@@ -54,6 +58,20 @@ function move_imgs(){
             }
         })
     }, 500)
+}
+function insert_Iframe(element){
+    if (element.urls_pages){
+        urls = (element.urls_pages.includes(","))
+            ? element.urls_pages.split(",").map(url => url.trim())
+            : [element.urls_pages]
+
+        let html_iframes = urls.map(url => `<div><iframe src="${url}"></iframe></div>`).join('');
+        const div = document.getElementById(element.name_repo);
+        if (div){
+            div.innerHTML = html_iframes
+        }
+    }
+
 }
 window.addEventListener("DOMContentLoaded", () => {
     insertHTML(
@@ -75,7 +93,7 @@ window.addEventListener("DOMContentLoaded", () => {
                         <path d="M58.333,75.000L33.333,50.000L58.333,25.000L64.167,30.833L45.000,50.000L64.167,69.167L58.333,75.000ZZ" style="fill: rgb(255, 255, 255);" class="fills"/>
                     </svg>
                 </button>
-                <div class="section_imgs">
+                <div class="section_imgs" id=\${name_repo}>
                     <img class="image_muro" src="resources/images/default_image.jpg" alt="">
                     <img class="image_muro" src="resources/images/default_image.jpg" alt="">
                     <img class="image_muro" src="resources/images/default_image.jpg" alt="">
@@ -129,7 +147,7 @@ window.addEventListener("DOMContentLoaded", () => {
                 <h2>\${name_repo}</h2>
             </a>
             <div class="info_proyect">
-                <div class="section-desplazable">
+                <div class="section-desplazable" id=\${name_repo}>
                     <img  class="image_muro" src="../images/default_image.jpg" alt="">
                     <img  class="image_muro" src="../images/default_image.jpg" alt="">
                     <img  class="image_muro" src="../images/default_image.jpg" alt="">

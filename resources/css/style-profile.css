@@ -30,6 +30,16 @@
 .section-desplazable img{
     width: 450px;
 }
+.section-desplazable div{
+    width: 450px;
+    height: 314px;
+    display: flex;
+    flex-shrink: 0;
+}
+.section-desplazable div iframe{
+    flex:1;
+    border:none;
+}
 .info_proyect p{
     width: 40%;
     line-height: 200%;

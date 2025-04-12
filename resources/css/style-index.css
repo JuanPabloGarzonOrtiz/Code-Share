@@ -27,9 +27,10 @@
 
 
 .container{
-    display: flex;
-    align-items: center;
     gap: 1rem;
+}
+.container:has(:only-child) {
+    justify-content: center;
 }
 .container .section_imgs{
     display: flex;
@@ -40,14 +41,21 @@
     height: 300px;
     gap: 1rem;  
 }
-.section_imgs img {
+.section_imgs{
+    margin: 0 5%;
+}
+.section_imgs img, .section_imgs iframe{
     flex: 0 0 auto;
     object-fit: cover;
     scroll-snap-align: center;
+}
+.section_imgs iframe{
+    width: 500px;
 }
 
 .left, .right{
     background: none;
     width: min-content;
+    border: none;
 }
 
