@@ -40,11 +40,10 @@ header img{
 /*Muro*/
 .muro{
     flex: 2.3;
-    margin-left: 2%;
     padding: 2%;
     overflow-y: auto;
     flex-wrap: nowrap;
-    height: 73vh;
+    height: 78vh;
 }
 
 /*Filtros*/
@@ -67,4 +66,25 @@ header, .background-input, .filtros, .proyect, .repositorio, .perfil{
 header, .main-index, .filtros div, .proyect div, .info_proyect{
     display: flex;
     justify-content: space-between;
+}
+
+@media (max-width:1200px){
+    .left, .right{
+        display: none;
+    }
+}
+@media (max-width:1000px){
+    /*Filtros*/
+    .filtros{
+        display: none;
+    }
+    .background-input button{
+        transform: translatex(-40%);
+    }
+}
+
+@media (max-width:600px){
+    .background-input button{
+        transform: translatex(-70%);
+    }
 }

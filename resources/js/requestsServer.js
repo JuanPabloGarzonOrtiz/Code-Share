@@ -79,7 +79,7 @@ window.addEventListener("DOMContentLoaded", () => {
         "muro-index",
         "beforeend",
         `<div class="proyect">
-            <div>
+            <div class="div_ln">
                 <a href="\${url_page}">
                     <h1>\${name_repo}</h1>
                 </a>
@@ -90,7 +90,7 @@ window.addEventListener("DOMContentLoaded", () => {
             <div class="container">
                 <button class="left">                
                     <svg width="60" height="100" viewBox="25 10 40 70">
-                        <path d="M58.333,75.000L33.333,50.000L58.333,25.000L64.167,30.833L45.000,50.000L64.167,69.167L58.333,75.000ZZ" style="fill: rgb(255, 255, 255);" class="fills"/>
+                        <path d="M58.333,75.000L33.333,50.000L58.333,25.000L64.167,30.833L45.000,50.000L64.167,69.167L58.333,75.000ZZ" class="fills"/>
                     </svg>
                 </button>
                 <div class="section_imgs" id=\${name_repo}>
@@ -101,7 +101,7 @@ window.addEventListener("DOMContentLoaded", () => {
                 </div>
                 <button class="right">                
                     <svg width="60" height="100" viewBox="25 10 40 70">
-                        <path d="M52.500,50.000L33.333,30.833L39.167,25.000L64.167,50.000L39.167,75.000L33.333,69.167L52.500,50.000ZZ" style="fill: rgb(255, 255, 255);" class="fills"/>
+                        <path d="M52.500,50.000L33.333,30.833L39.167,25.000L64.167,50.000L39.167,75.000L33.333,69.167L52.500,50.000ZZ" class="fills"/>
                     </svg>
                 </button>
             </div>

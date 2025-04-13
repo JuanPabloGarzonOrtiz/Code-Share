@@ -1,61 +1,92 @@
 .proyect{
-    margin-bottom: 2%;
-    padding: 2%;
-    height: 95%;
     display: flex;
-    flex-direction:column;
-    justify-content: space-around;
+    flex-direction: column;
+    height: 520px;
+    margin-bottom: 2%;
 }
-.proyect a{
+/*Seccion de Titulo y Foto*/
+.proyect .div_ln{
+    margin: 2% 2% 1% 2%;
+}
+.div_ln a{
     text-decoration: none;
     color: white;
 }
-.proyect h1{
-    margin: 0;
-    width: max-content;
+.div_ln a:hover{
+    color: gray;
 }
-.proyect a{
-    width: 8%;
-}
-.proyect .photo_profile{
+
+.div_ln .photo_profile{
     width: 60px;
     border-radius: 100px;
 }
-.proyect p{
-    margin: 10px 10px 5px 10px;
-}
 
-
+/*Seccion de Botones e iframe*/
 .container{
-    gap: 1rem;
+    height: 600px;
+    display: flex;
+    justify-content: center;
 }
 .container:has(:only-child) {
     justify-content: center;
 }
+
 .container .section_imgs{
-    display: flex;
-    overflow-x: auto;
+    overflow: auto;
     scroll-snap-type: x mandatory;
     scroll-behavior: smooth;
-    width: 600px;
-    height: 300px;
-    gap: 1rem;  
 }
-.section_imgs{
-    margin: 0 5%;
-}
-.section_imgs img, .section_imgs iframe{
-    flex: 0 0 auto;
-    object-fit: cover;
+.section_imgs iframe, .section_imgs img{
+    width: 670px;
+    padding: 0px 8px;
+    border: none;
     scroll-snap-align: center;
+    flex: 0 0 auto;
 }
-.section_imgs iframe{
-    width: 500px;
+.section_imgs img{
+    height: 360px;
 }
-
 .left, .right{
-    background: none;
-    width: min-content;
+    fill: white;
+    height: min-content;
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+    background:none;
     border: none;
 }
+.left:active, .right:active{
+    fill: gray;
+}
 
+/*Parrafo Publicacion*/
+.proyect p{
+    padding: 1% 5%;
+}
+
+
+@media (max-width: 750px){
+    .section_imgs iframe, .section_imgs img{
+        width: 600px;
+    }
+}
+@media (max-width: 680px){
+    .section_imgs iframe, .section_imgs img{
+        width: 500px;
+    }
+}
+@media (max-width: 571px){
+    .section_imgs iframe, .section_imgs img{
+        width: 500px;
+    }
+}
+@media (max-width: 560px){
+    .section_imgs iframe, .section_imgs img{
+        width: 400px;
+    }
+}
+@media (max-width: 460px){
+    .section_imgs iframe, .section_imgs img{
+        width: 360px;
+    }
+}

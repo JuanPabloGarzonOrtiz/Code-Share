@@ -1,46 +1,65 @@
-/*main*/
+/*Presentacion*/
 .Presentacion{
     display: flex;
     padding: 3%;
-    gap: 10%;
+    gap:5%;
     align-items: center;
 }
-.Presentacion img{
-    width: 200px;
+.Presentacion a{
+    display: inline;
+    width: 20%;
+}
+.Presentacion a img{
+    width: 100%;
     border-radius: 100%;
+    display: block;
 }
-.repositorio{
+
+/* Repositorio */
+.repositorio {
+    margin: 2% auto; 
     padding: 1% 3%;
-    margin: 2% 7%;
+    max-width: 90%;
 }
-.repositorio a{
-    color: rgb(86, 151, 235);
+.repositorio a {
     text-decoration: none;
+    color: white;
 }
-.info_proyect{
+.repositorio a:hover {
+    color: gray;
+}
+
+/* Info de proyectos */
+.info_proyect {
+    height: 300px;
     align-items: center;
+    gap: 1rem;
 }
-.section-desplazable{
+
+/* Sección desplazable */
+.section-desplazable {
+    width: 90%;
     display: flex;
     overflow-x: auto;
-    flex-wrap: nowrap;
-    width: 50%;
-    gap: 2%;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
 }
-.section-desplazable img{
-    width: 450px;
-}
-.section-desplazable div{
-    width: 450px;
-    height: 314px;
+.section-desplazable div {
+    height: 300px;
     display: flex;
-    flex-shrink: 0;
+    flex-shrink: 1;
+    min-width: clamp(300px, 50%, 800px);
+    margin: 0 3%
 }
-.section-desplazable div iframe{
-    flex:1;
-    border:none;
+.section-desplazable div iframe {
+    flex: 1;
+    width: 800px;
+    scroll-snap-align: center;
 }
-.info_proyect p{
-    width: 40%;
-    line-height: 200%;
+
+
+@media (max-width: 600px) {
+    .info_proyect {
+        flex-direction: column;
+    }
 }
