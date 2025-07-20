@@ -31,35 +31,36 @@
 
 /* Info de proyectos */
 .info_proyect {
-    height: 300px;
+    height: 600px;
     align-items: center;
-    gap: 1rem;
+    gap: 5rem;
 }
 
 /* Sección desplazable */
-.section-desplazable {
-    width: 90%;
+.info_proyect p{
+    width: 40%;
+}
+.section-desplazable{
+    width: clamp(300px, 90vw, 100%);
+    height: 95%;
     display: flex;
     overflow-x: auto;
     scroll-snap-type: x mandatory;
     scroll-behavior: smooth;
+    gap: 1%;
 }
-.section-desplazable div {
-    height: 300px;
-    display: flex;
-    flex-shrink: 1;
-    min-width: clamp(300px, 50%, 800px);
-    margin: 0 3%
-}
-.section-desplazable div iframe {
-    flex: 1;
-    width: 800px;
-    scroll-snap-align: center;
+.section-desplazable iframe{
+    width: clamp(300px, 55vw, 1100px);
+    height: 98%;
 }
 
-
-@media (max-width: 600px) {
+@media (max-width: 1200px) {
     .info_proyect {
         flex-direction: column;
+        height: 800px;
+    }
+    .info_proyect p {
+        width: 90%;
     }
 }
+
