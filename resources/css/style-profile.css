@@ -2,7 +2,7 @@
 .Presentacion{
     display: flex;
     padding: 3%;
-    gap:5%;
+    gap:10%;
     align-items: center;
 }
 .Presentacion a{
@@ -10,7 +10,7 @@
     width: 20%;
 }
 .Presentacion a img{
-    width: 100%;
+    width: clamp(120px, 23vw, 300px);
     border-radius: 100%;
     display: block;
 }
@@ -52,6 +52,8 @@
 .section-desplazable iframe{
     width: clamp(300px, 55vw, 1100px);
     height: 98%;
+    scroll-snap-align: center;
+    flex: 0 0 auto;
 }
 
 @media (max-width: 1200px) {

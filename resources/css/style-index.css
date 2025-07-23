@@ -32,11 +32,11 @@
 }
 
 .container .section_imgs{
-    overflow: auto;
+    overflow-x: auto;
     scroll-snap-type: x mandatory;
     scroll-behavior: smooth;
 }
-/*AQUI*/
+
 .section_imgs iframe, .section_imgs img{
     width:  clamp(360px, 65vw, 1100px);;
     padding: 0px 8px;

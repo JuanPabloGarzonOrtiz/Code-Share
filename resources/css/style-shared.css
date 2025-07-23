@@ -17,7 +17,7 @@ header img{
 }
 .background-input button{
     position: absolute;
-    transform: translate(50%);
+    transform: translate(clamp(30%, 0vw, 10%));
     background: none;
     border: none;
 }
@@ -40,7 +40,7 @@ header img{
 
 /*Muro*/
 .muro{
-    flex: 2.3;
+    flex: 4.3;
     padding: 2%;
     overflow-y: auto;
     flex-wrap: nowrap;
@@ -52,10 +52,22 @@ header img{
     flex: 0.7;
     height: min-content;
     align-self: center;
-    padding: 10px 20px;
+    padding: 10px 30px;
 }
+
 .filtros div{
+    display: flex;
+    align-items: center;
+    margin: 10px;
+    gap: 10%;
     font-size: 150%;
+    border-radius: 15px;
+}
+.filtros div:hover{
+    background-color: dimgray;
+}
+.filtros div:active{
+    background-color: silver;
 }
 
 /*Bordes*/
@@ -64,7 +76,7 @@ header, .background-input, .filtros, .proyect, .repositorio, .perfil{
     border-radius: 10px;
 }
 /*Alineacion*/
-header, .main-index, .filtros div, .proyect div, .info_proyect{
+header, .main-index,  .proyect div, .info_proyect{
     display: flex;
     justify-content: space-between;
 }

@@ -13,6 +13,7 @@ function insertHTML(ruta_Server, contenedor, position, htmlTemplate){
                 return 
             }else if (htmlTemplate.includes('class="repositorio"')){
                 for (let element of data){ 
+                    
                     if (element.display_name == data_Search){
                         let html = htmlTemplate.replace(/\$\{(.*?)\}/g, (match, key) => element[key.trim()] || '');
                         document.getElementById(contenedor).insertAdjacentHTML(position, html);
@@ -29,7 +30,7 @@ function insertHTML(ruta_Server, contenedor, position, htmlTemplate){
                 let template = document.createElement('template');
                 template.innerHTML = html.trim();
                 let htmlNode = template.content.firstElementChild;
-
+                
                 if (element.urls_pages.split(',').length == 1){
                     htmlNode.querySelector('.left').remove();
                     htmlNode.querySelector('.right').remove();
@@ -37,6 +38,8 @@ function insertHTML(ruta_Server, contenedor, position, htmlTemplate){
                 document.getElementById(contenedor).insertAdjacentHTML(position, htmlNode.outerHTML);
                 insert_Iframe(element);
             }
+
+
         }else if (contenedor == "muro-search"){
             if (user_Search){
                 let html = htmlTemplate.replace(/\$\{(.*?)\}/g, (match, key) => user_Search[key.trim()] || '');
@@ -56,9 +59,9 @@ function move_imgs(){
         proyectos.forEach(proyect => {
             const btnLeft = proyect.querySelector('.left')
             const btnRight = proyect.querySelector('.right')
-            const container = proyect.querySelector('.section_imgs')
+            const container = (proyect.querySelector('.section_imgs')) ? proyect.querySelector('.section_imgs') : proyect.querySelector('.section-desplazable')
 
-            if(btnLeft && btnRight && container){
+            if(container && btnLeft && btnRight){  
                 const img = container.querySelector('img');
                 const elementsWifth = (img) ? img.offsetWidth : container.querySelector('iframe').offsetWidth;
                 const gap = parseInt(getComputedStyle(container).gap) || 0;
@@ -74,20 +77,24 @@ function move_imgs(){
         })
     }, 500)
 }
+
 function insert_Iframe(element){
     if (element.urls_pages){
-        urls = (element.urls_pages.includes(","))
+        let urls = (element.urls_pages.includes(","))
             ? element.urls_pages.split(",").map(url => url.trim())
             : [element.urls_pages]
+        let html_iframes = urls.map((url, i) => {
+            const iframeId = `iframe_${element.name_repo}_${i}`;
+            return `<div><iframe id="${iframeId}" src="${url}" tabindex="-1" onload="window.postMessage({type:'iframeLoaded'},'*')"></iframe></div>`;
+        }).join('');
 
-        let html_iframes = urls.map(url => `<div><iframe src="${url}"></iframe></div>`).join('');
         const div = document.getElementById(element.name_repo);
         if (div){
             div.innerHTML = html_iframes
         }
     }
-
 }
+
 function modify_iframe(){
     section = document.getElementsByClassName("section-desplazable");
                 for (let element of section) {
@@ -95,16 +102,29 @@ function modify_iframe(){
                     if (divs.length === 1){ 
                         let iframe = divs[0].querySelector("iframe");
                         if (iframe){
-                            if (window.innerWidth <= 1200){
-                                iframe.style.width = "clamp(300px, 87vw, 1100px)";
-                            }else{
-                                iframe.style.width = "clamp(300px, 60vw, 1100px)";
-                            }
+                            if (window.innerWidth <= 1200) iframe.style.width = "clamp(300px, 87vw, 1100px)";
+                            else iframe.style.width = "clamp(300px, 60vw, 1100px)";
+                            
                         }
                     }
                 }
 }
 window.addEventListener("resize", modify_iframe);
+
+
+//Event Redireccion y Registro de Vista
+function event_Proyect_index(event, url){
+    event.preventDefault();
+    setTimeout(() => {
+        const doneEvent = new CustomEvent("proyect_index", {
+            detail: {
+                target: event.target,
+                done: () => window.location.href = url
+            }
+        });
+        document.dispatchEvent(doneEvent);
+    }, 500);
+}
 
 window.addEventListener("DOMContentLoaded", () => {
     var name_plantilla = window.location.pathname.split('/').pop().replace(".html","")
@@ -114,11 +134,13 @@ window.addEventListener("DOMContentLoaded", () => {
             "muro-index",
             "beforeend",
             `<div class="proyect">
+                <input type="hidden" class="id_repo" value="\${id_repo}">
+                <input type="hidden" class="count_view" value="\${vistas}">
                 <div class="div_ln">
-                    <a href="\${url_page}">
-                        <h1>\${name_repo}</h1>
+                    <a onclick="event_Proyect_index(event, '\${url_page}')">
+                        <h1 class="name_repo">\${name_repo}</h1>
                     </a>
-                    <a href="resources/views/profile.html?name=\${display_name}">
+                    <a onclick="event_Proyect_index(event, 'resources/views/profile.html?name=\${display_name}')">
                         <img class="photo_profile" src="\${photo_user}">
                     </a>
                 </div>
@@ -139,16 +161,20 @@ window.addEventListener("DOMContentLoaded", () => {
                 </div>
                 <p>\${description}</p>
             </div>`
-        );
+        )
         move_imgs();
+
+
     }else if(name_plantilla === "search"){
         insertHTML(
             "https://server-5lrb.onrender.com/dataUser",
             "muro-search",
             "beforeend",
             `<div class="perfil">
-                <a href="profile.html?name=\${display_name}">
-                    <img src="\${photo_user}" alt="">
+                <input type="hidden" class="id_user" value="\${id_user}">
+                <input type="hidden" class="count_view" value="\${vistas}">
+                <a onclick="event_Proyect_index(event, 'profile.html?name=\${display_name}')">
+                    <img class="photo_profile" src="\${photo_user}" alt="">
                 </a>
                 <div>
                     <h1>\${display_name}</h1>
